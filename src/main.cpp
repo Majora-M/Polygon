@@ -44,7 +44,37 @@ void setup()
 // List of patterns to cycle through.  Each is defined as a separate function below.
 typedef void (*SimplePatternList[])();
 // SimplePatternList gPatterns = {rainbow, nngRainbow, rainbowWithGlitter, confetti, sinelon, juggle, bpm};
-SimplePatternList gPatterns = {tri_sinelon_symmetry, tri_sinelon_circular, tri_rainbow_symmetry, tri_rainbow_circular};
+
+// DEBUG PATTERNS
+// SimplePatternList gPatterns = {
+//     tri_bpm_chase,
+//     tri_bpm_sym_radial,
+//     tri_bpm_sym_axial,
+//     tri_sinelon_chase,
+//     tri_sinelon_circular,
+//     tri_sinelon_sym_radial,
+//     tri_sinelon_sym_axial,
+//     tri_rainbow_chase,
+//     tri_rainbow_circular,
+//     tri_rainbow_sym_radial,
+//     tri_rainbow_sym_axial,
+//     tri_confetti,
+// };
+
+SimplePatternList gPatterns = {
+    tri_bpm_chase,
+    tri_sinelon_sym_radial,
+    tri_rainbow_circular,
+    tri_bpm_sym_axial,
+    tri_sinelon_chase,
+    tri_confetti_circular,
+    tri_confetti_axial,
+    tri_rainbow_sym_radial,
+    tri_sinelon_sym_axial,
+    tri_bpm_sym_radial,
+    tri_sinelon_circular,
+    tri_rainbow_sym_axial,
+};
 
 // TODO list of palettes ?
 // typedef TProgmemRGBPalette16[];
@@ -52,6 +82,10 @@ SimplePatternList gPatterns = {tri_sinelon_symmetry, tri_sinelon_circular, tri_r
 
 uint8_t gCurrentPatternNumber = 0; // Index number of which pattern is current
 uint8_t gHue = 0;                  // rotating "base color" used by many of the patterns
+uint8_t gBpm = 120;
+uint8_t gBpmMin = 80;
+uint8_t gBpmMax = 140;
+uint32_t analogValue = 0;
 
 void nextPattern()
 {
@@ -71,6 +105,9 @@ void loop()
 {
   // Call the current pattern function once, updating the 'leds' array
   gPatterns[gCurrentPatternNumber]();
+
+  analogValue = analogRead(34); // GIOP36
+  gBpm = map(analogValue, 0, 4095, gBpmMin, gBpmMax);
 
   // send the 'leds' array out to the actual LED strip
   FastLED.show();

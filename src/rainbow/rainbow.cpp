@@ -88,6 +88,6 @@ void triangulize()
 {
     for (int i = 0; i < 6; i++)
     {
-        nng_fill_rainbow(leds, i * NUM_LEDS_TRI, NUM_LEDS_TRI, gHue, 12, i % 2);
+        nng_fill_rainbow(leds, i * NUM_LEDS_SIXTH, NUM_LEDS_SIXTH, gHue, 12, i % 2);
     }
 }

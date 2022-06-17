@@ -24,7 +24,9 @@ FASTLED_USING_NAMESPACE
 #define COLOR_ORDER GRB
 // The 1m strip is 90 LEDs long
 #define NUM_LEDS 90
-#define NUM_LEDS_TRI 15
+#define NUM_LEDS_SIXTH 15
+#define NUM_LEDS_THIRD 30
+#define NUM_LEDS_HALF 45
 
 extern CRGB leds[NUM_LEDS];
 
@@ -38,3 +40,4 @@ extern CRGB leds[NUM_LEDS];
 
 extern uint8_t gCurrentPatternNumber; // Index number of which pattern is current
 extern uint8_t gHue;                  // rotating "base color" used by many of the patterns
+extern uint8_t gBpm;
